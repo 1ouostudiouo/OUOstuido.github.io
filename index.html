@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUO Studio — Creative Studio</title>
+<meta name="description" content="3D, 브랜딩, UI/UX, 개발까지. 입체적으로 사고하는 크리에이티브 스튜디오 OUO Studio.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:     #0a0a0b;
+  --bg2:    #111113;
+  --bg3:    #18181c;
+  --text:   #edeae4;
+  --muted:  #6b6865;
+  --dim:    #3a3835;
+  --accent: #b8ff57;
+  --border: rgba(255,255,255,0.06);
+  --serif:  'Cormorant Garamond', serif;
+  --sans:   'Syne', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 2.5rem;
+  background: rgba(10,10,11,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1.2rem;
+  transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--accent); color: var(--bg); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 0 2.5rem;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0;
+  position: relative;
+}
+.hero-bg-text {
+  position: absolute;
+  right: -2rem; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: clamp(8rem, 22vw, 20rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+  user-select: none;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.hero-eyebrow-line {
+  width: 40px; height: 1px;
+  background: var(--accent);
+}
+.hero-eyebrow-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  max-width: 820px;
+  margin-bottom: 2.5rem;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+.hero-title strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+.hero-sub {
+  max-width: 440px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.85;
+  margin-bottom: 3.5rem;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 2.5rem;
+}
+.btn-main {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.9rem 2.2rem;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.btn-main:hover { opacity: 0.85; }
+.btn-ghost {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.btn-ghost:hover { color: var(--text); }
+.btn-ghost svg { transition: transform 0.25s; }
+.btn-ghost:hover svg { transform: translateX(4px); }
+
+.hero-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+}
+.hero-tags {
+  display: flex; gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.hero-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.hero-tag-accent { color: var(--muted); }
+.hero-year {
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+}
+
+/* ── WORK ── */
+#work { padding: 6rem 2.5rem; }
+.sec-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.sec-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+}
+.sec-title em { font-style: italic; }
+.link-sm {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem;
+  transition: color 0.25s;
+  padding-bottom: 0.3rem;
+}
+.link-sm:hover { color: var(--accent); }
+.link-sm svg { transition: transform 0.25s; }
+.link-sm:hover svg { transform: translateX(3px); }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  gap: 3px;
+}
+.work-card {
+  background: var(--bg3);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.work-card:nth-child(1) {
+  grid-column: 1 / 8;
+  aspect-ratio: 16/10;
+}
+.work-card:nth-child(2) {
+  grid-column: 8 / 13;
+  aspect-ratio: 4/3;
+}
+.work-card:nth-child(3) {
+  grid-column: 1 / 5;
+  aspect-ratio: 4/3;
+}
+.work-card:nth-child(4) {
+  grid-column: 5 / 9;
+  aspect-ratio: 4/3;
+}
+.work-card:nth-child(5) {
+  grid-column: 9 / 13;
+  aspect-ratio: 4/3;
+}
+.work-fill {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.7s cubic-bezier(0.2,0,0,1);
+  position: relative;
+}
+.work-card:hover .work-fill { transform: scale(1.04); }
+.work-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 5rem;
+  color: rgba(255,255,255,0.04);
+  user-select: none;
+}
+.work-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,11,0.85) 0%, transparent 60%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.work-card:hover .work-overlay { opacity: 1; }
+.work-cat {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+.work-name {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--text);
+}
+
+/* ── ABOUT ── */
+#about {
+  padding: 6rem 2.5rem;
+  background: var(--bg2);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 6rem;
+  align-items: start;
+}
+.about-kicker {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.about-body p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.95;
+  margin-bottom: 1.2rem;
+}
+.about-body p:last-child { margin-bottom: 0; }
+.capabilities {
+  margin-top: 2.5rem;
+}
+.cap-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 1rem;
+}
+.cap-list {
+  display: flex; flex-direction: column; gap: 0;
+}
+.cap-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.cap-item:hover { color: var(--text); }
+.cap-item span {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.stat-box {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stat-box:nth-child(2) { border-right: none; }
+.stat-box:nth-child(3) { border-bottom: none; }
+.stat-box:nth-child(4) { border-right: none; border-bottom: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-l {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.tools-row {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+}
+.tool-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.85rem;
+  transition: all 0.2s;
+}
+.tool-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── CONTACT ── */
+#contact {
+  padding: 8rem 2.5rem;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.contact-bg {
+  position: absolute;
+  bottom: -4rem; left: -2rem;
+  font-family: var(--serif);
+  font-size: clamp(6rem, 18vw, 16rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(184,255,87,0.03);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+.contact-inner {
+  max-width: 680px;
+  position: relative;
+}
+.contact-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.contact-label::before {
+  content: '';
+  display: block; width: 28px; height: 1px;
+  background: var(--accent);
+}
+.contact-title {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.contact-title em { font-style: italic; }
+.contact-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 3rem;
+  line-height: 1.8;
+  max-width: 420px;
+}
+.contact-email-wrap {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.contact-email {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.contact-email:hover { color: var(--accent); }
+.contact-socials {
+  display: flex; gap: 2rem; align-items: center;
+}
+.social-link {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.social-link:hover { color: var(--accent); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+  background: var(--bg);
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.2,0,0,1), transform 0.9s cubic-bezier(0.2,0,0,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  #hero, #work, #about, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .work-card:nth-child(1) { grid-column: 1 / -1; }
+  .work-card:nth-child(2) { grid-column: 1 / -1; }
+  .work-card:nth-child(3), .work-card:nth-child(4), .work-card:nth-child(5) { grid-column: span 6; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">OUO<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:ouostudiouo@gmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-bg-text" aria-hidden="true">OUO</div>
+
+    <div class="hero-eyebrow reveal">
+      <span class="hero-eyebrow-line"></span>
+      <span class="hero-eyebrow-text">Creative Studio — Seoul</span>
+    </div>
+
+    <h1 class="hero-title reveal reveal-delay-1">
+      <em>입체적으로</em> 사고하는<br>
+      <strong>크리에이티브</strong> 스튜디오
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      3D 비주얼에서 출발해 브랜딩, UI/UX, 개발까지.
+      OUO Studio는 아이디어의 깊이를 다루는 방식이 다릅니다.
+      10년의 경험, 하나의 관점.
+    </p>
+
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="#work" class="btn-main">
+        View Work
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#contact" class="btn-ghost">
+        Let's talk
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-tags">
+      <span class="hero-tag">3D Design</span>
+      <span class="hero-tag hero-tag-accent">·</span>
+      <span class="hero-tag">Brand Identity</span>
+      <span class="hero-tag hero-tag-accent">·</span>
+      <span class="hero-tag">UI / UX</span>
+      <span class="hero-tag hero-tag-accent">·</span>
+      <span class="hero-tag">Development</span>
+    </div>
+    <span class="hero-year">Est. 2015</span>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="sec-header reveal">
+    <div>
+      <p class="sec-label">Selected Work</p>
+      <h2 class="sec-title">프로젝트 <em>아카이브</em></h2>
+    </div>
+    <a href="#" class="link-sm">
+      전체 보기
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="work-grid reveal">
+    <div class="work-card">
+      <div class="work-fill" style="background: #13130f;">
+        <span class="work-num">01</span>
+      </div>
+      <div class="work-overlay">
+        <p class="work-cat">Brand Identity</p>
+        <p class="work-name">Project Title</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-fill" style="background: #0d1218;">
+        <span class="work-num">02</span>
+      </div>
+      <div class="work-overlay">
+        <p class="work-cat">3D · Motion</p>
+        <p class="work-name">Project Title</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-fill" style="background: #121318;">
+        <span class="work-num">03</span>
+      </div>
+      <div class="work-overlay">
+        <p class="work-cat">UI / UX</p>
+        <p class="work-name">Project Title</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-fill" style="background: #0f1310;">
+        <span class="work-num">04</span>
+      </div>
+      <div class="work-overlay">
+        <p class="work-cat">Development</p>
+        <p class="work-name">Project Title</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-fill" style="background: #13100d;">
+        <span class="work-num">05</span>
+      </div>
+      <div class="work-overlay">
+        <p class="work-cat">Art Direction</p>
+        <p class="work-name">Project Title</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-header reveal">
+    <div>
+      <p class="sec-label">About</p>
+      <h2 class="sec-title">OUO <em>Studio</em></h2>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="reveal">
+      <p class="about-kicker">
+        "좋은 결과물은 한 분야의 깊이에서 오지 않는다. 여러 분야를 넘나드는 시선에서 온다."
+      </p>
+      <div class="about-body">
+        <p>
+          OUO Studio는 3D 비주얼을 기반으로 성장한 크리에이티브 스튜디오입니다. 10년 이상의 업력 속에서 브랜딩, UI/UX 디자인, 그리고 프론트엔드 개발까지 영역을 넓혀왔습니다.
+        </p>
+        <p>
+          특정 카테고리에 갇히기보다, 프로젝트가 필요로 하는 것을 끝까지 구현하는 데 집중합니다. 3D로 구조를 상상하고, 브랜딩으로 언어를 만들고, UI로 경험을 설계하고, 코드로 완성합니다.
+        </p>
+      </div>
+
+      <div class="capabilities">
+        <p class="cap-title">Capabilities</p>
+        <div class="cap-list">
+          <div class="cap-item">3D Design &amp; Visualization <span>Blender · Cinema 4D</span></div>
+          <div class="cap-item">Brand Identity <span>Strategy · Visual System</span></div>
+          <div class="cap-item">UI / UX Design <span>Figma · Prototyping</span></div>
+          <div class="cap-item">Web Development <span>HTML · CSS · JS</span></div>
+          <div class="cap-item">Art Direction <span>Campaign · Editorial</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <p class="stat-n">10+</p>
+          <p class="stat-l">Years</p>
+        </div>
+        <div class="stat-box">
+          <p class="stat-n">50+</p>
+          <p class="stat-l">Projects</p>
+        </div>
+        <div class="stat-box">
+          <p class="stat-n">4</p>
+          <p class="stat-l">Disciplines</p>
+        </div>
+        <div class="stat-box">
+          <p class="stat-n">∞</p>
+          <p class="stat-l">Curiosity</p>
+        </div>
+      </div>
+
+      <p class="cap-title" style="margin-bottom: 0.8rem;">Tools</p>
+      <div class="tools-row">
+        <span class="tool-tag">Blender</span>
+        <span class="tool-tag">Cinema 4D</span>
+        <span class="tool-tag">Figma</span>
+        <span class="tool-tag">Illustrator</span>
+        <span class="tool-tag">Photoshop</span>
+        <span class="tool-tag">After Effects</span>
+        <span class="tool-tag">React</span>
+        <span class="tool-tag">Framer</span>
+        <span class="tool-tag">Webflow</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg" aria-hidden="true">contact</div>
+  <div class="contact-inner reveal">
+    <p class="contact-label">Get in touch</p>
+    <h2 class="contact-title">
+      함께 만들<em>어봐요</em>
+    </h2>
+    <p class="contact-desc">
+      새 프로젝트, 협업 제안, 또는 그냥 궁금한 것도 환영합니다.
+      어떤 이야기든 먼저 들을게요.
+    </p>
+    <div class="contact-email-wrap">
+      <a href="mailto:ouostudiouo@gmail.com" class="contact-email">ouostudiouo@gmail.com</a>
+    </div>
+    <div class="contact-socials">
+      <a href="https://www.behance.net/OUOSTUDIO" target="_blank" rel="noopener" class="social-link">Behance</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 OUO Studio. All rights reserved.</span>
+  <span>Seoul, Korea</span>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
